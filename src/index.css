@@ -178,6 +178,9 @@ a {
   margin-left: auto;
   margin-right: auto;
 }
+.home-page{
+  padding: 10px 20px;
+}
 
 .hero h1 {
   font-size: 2.5rem;

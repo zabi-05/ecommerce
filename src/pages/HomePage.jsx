@@ -9,7 +9,7 @@ const HomePage = () => {
           alt="Fashion Banner"
           className="hero-image"
         />
-        <h1>Welcome to Trendy Threads</h1>
+        <h1>Welcome to 69 Collection</h1>
         <p>Discover the latest trends in men's, women's, and kids' fashion.</p>
       </section>
 

@@ -1,15 +1,15 @@
-// App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
-import HomePage from './pages/HomePage';
-import ProductDetail from './pages/ProductDetails';
-import CartPage from './pages/CartPage';
-import CheckoutPage from './pages/CheckoutPage';
-import ConfirmationPage from './pages/ConfirmationPage';
-import Navigation from './components/Navigation';
+import HomePage from "./pages/HomePage";
+import ProductDetails from "./pages/ProductDetails";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import ConfirmationPage from "./pages/ConfirmationPage";
+import Navigation from './components/Navigation';  // <-- ADD THIS
 import Footer from './components/Footer';
+import './index.css';
 
- const  App =()=> {
+const App = () => {
   return (
     <CartProvider>
       <Router>
@@ -17,7 +17,7 @@ import Footer from './components/Footer';
         <main className="app-main">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
@@ -27,5 +27,6 @@ import Footer from './components/Footer';
       </Router>
     </CartProvider>
   );
-}
-export default App
+};
+
+export default App;

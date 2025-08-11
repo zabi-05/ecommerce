@@ -1,4 +1,3 @@
-// pages/CartPage.js
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
@@ -21,29 +20,37 @@ const CartPage = () => {
                 <div className="item-info">
                   <h3>{item.name}</h3>
                   <p>${item.price}</p>
+                  <p>Size: {item.size}</p>
+                  <p>Color: {item.color}</p>
                   <div className="quantity-controls">
-                    <button 
-                      onClick={() => dispatch({ 
-                        type: 'UPDATE_QUANTITY', 
-                        payload: { id: item.id, quantity: item.quantity - 1 } 
-                      })}
+                    <button
+                      onClick={() =>
+                        dispatch({
+                          type: 'UPDATE_QUANTITY',
+                          payload: { id: item.id, quantity: item.quantity - 1 },
+                        })
+                      }
                       disabled={item.quantity === 1}
                     >
                       -
                     </button>
                     <span>{item.quantity}</span>
-                    <button 
-                      onClick={() => dispatch({ 
-                        type: 'UPDATE_QUANTITY', 
-                        payload: { id: item.id, quantity: item.quantity + 1 } 
-                      })}
+                    <button
+                      onClick={() =>
+                        dispatch({
+                          type: 'UPDATE_QUANTITY',
+                          payload: { id: item.id, quantity: item.quantity + 1 },
+                        })
+                      }
                     >
                       +
                     </button>
                   </div>
-                  <button 
+                  <button
                     className="remove-btn"
-                    onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: item.id })}
+                    onClick={() =>
+                      dispatch({ type: 'REMOVE_ITEM', payload: item.id })
+                    }
                   >
                     Remove
                   </button>
@@ -53,7 +60,9 @@ const CartPage = () => {
           </div>
           <div className="cart-summary">
             <h2>Total: ${total.toFixed(2)}</h2>
-            <button className="btn btn-primary"><Link to="/checkout">Proceed to Checkout</Link></button>
+            <Link to="/checkout" className="btn btn-primary">
+              Proceed to Checkout
+            </Link>
           </div>
         </>
       )}

@@ -1,33 +1,34 @@
-// components/Navigation.js
-import { Link, NavLink } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+// src/components/Navigation.js
+import { Link, NavLink } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const Navigation = () => {
   const { cart } = useCart();
-  const cartItemsCount = cart.reduce((count, item) => count + item.quantity, 0);
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <nav className="main-nav">
       <div className="nav-brand">
-        <Link to="/">E-Commerce</Link>
+        <Link to="/">
+         <b>69 Collection</b>
+        </Link>
       </div>
       
       <ul className="nav-links">
         <li>
           <NavLink 
             to="/" 
-            className={({ isActive }) => isActive ? 'active-link' : ''}
+            className={({ isActive }) => (isActive ? "active-link" : "")}
           >
             Home
           </NavLink>
         </li>
-       
         <li>
           <NavLink 
-            to="/cart"
-            className={({ isActive }) => isActive ? 'active-link' : ''}
+            to="/cart" 
+            className={({ isActive }) => (isActive ? "active-link" : "")}
           >
-            Cart ({cartItemsCount})
+            Cart ({totalItems})
           </NavLink>
         </li>
       </ul>

@@ -1,58 +1,49 @@
-// pages/CheckoutPage.js
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import EasyPaisaPayment from './EasyPaisaPayment';
 
 const CheckoutPage = () => {
-  const [shippingInfo, setShippingInfo] = useState({
-    name: '',
-    email: '',
-    address: '',
-    city: '',
-    postalCode: '',
-  });
   const { cart, dispatch } = useCart();
   const navigate = useNavigate();
+  const [form, setForm] = useState({
+    name: '',
+    address: '',
+    email: '',
+    phone: '',
+  });
+
+  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Process checkout logic here
+    if (!form.name || !form.address || !form.email || !form.phone) {
+      alert('Please fill in all fields.');
+      return;
+    }
     dispatch({ type: 'CLEAR_CART' });
-    navigate('/confirmation', { state: { orderDetails: shippingInfo } });
+    navigate('/confirmation', { state: { orderTotal: total } });
   };
 
   return (
     <div className="checkout-page">
-      <div className="shipping-form">
-        <h1>Checkout</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Full Name:
-            <input 
-              type="text" 
-              required 
-              value={shippingInfo.name}
-              onChange={(e) => setShippingInfo({ ...shippingInfo, name: e.target.value })}
-            />
-          </label>
-          {/* Add other form fields similarly */}
-          <button type="submit" className="btn btn-primary">Place Order</button>
-        </form>
-      </div>
-      <div className="order-summary">
-        <h2>Order Summary</h2>
-        {cart.map(item => (
-          <div key={item.id} className="order-item">
-            <span>{item.name}</span>
-            <span>${(item.price * item.quantity).toFixed(2)}</span>
-          </div>
-        ))}
-        <div className="total">
-          <h3>Total:</h3>
-          <h3>${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}</h3>
-        </div>
-      </div>
+      <h1>Checkout</h1>
+      <form onSubmit={handleSubmit} className="checkout-form">
+        <input name="name" placeholder="Full Name" value={form.name} onChange={handleChange} />
+        <input name="address" placeholder="Address" value={form.address} onChange={handleChange} />
+        <input name="email" placeholder="Email" value={form.email} onChange={handleChange} />
+        <input name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} />
+        <button type="submit" className="btn btn-primary">Place Order</button>
+      </form>
     </div>
   );
 };
-export default CheckoutPage
+
+export default CheckoutPage;

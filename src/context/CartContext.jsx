@@ -7,7 +7,7 @@ const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
       // If item already in cart, increase quantity
-      const existingItem = state.find(item => item.id === action.payload.id);
+      { const existingItem = state.find(item => item.id === action.payload.id);
       if (existingItem) {
         return state.map(item =>
           item.id === action.payload.id
@@ -16,7 +16,7 @@ const cartReducer = (state, action) => {
         );
       }
       // Otherwise add new item with quantity 1
-      return [...state, { ...action.payload, quantity: 1 }];
+      return [...state, { ...action.payload, quantity: 1 }]; }
 
     case "REMOVE_ITEM":
       // Remove item by id

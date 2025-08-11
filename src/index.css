@@ -181,6 +181,37 @@ a {
 .home-page{
   padding: 10px 20px;
 }
+/* Container for each label-select pair */
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  max-width: 200px;
+}
+
+/* Style the select dropdown */
+label select {
+  margin-top: 0.4rem;
+  padding: 8px 10px;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  background-color: white;
+  color: var(--text-color);
+  transition: border-color var(--transition-speed);
+  cursor: pointer;
+}
+
+/* Focus state for better accessibility */
+label select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 4px var(--secondary-color);
+}
+
 
 .hero h1 {
   font-size: 2.5rem;

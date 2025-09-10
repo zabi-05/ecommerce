@@ -28,7 +28,7 @@ const Navigation = () => {
             to="/cart" 
             className={({ isActive }) => (isActive ? "active-link" : "")}
           >
-            Cart ({totalItems})
+            🛒 Cart ({totalItems})
           </NavLink>
         </li>
       </ul>

@@ -1,5 +1,7 @@
 // src/components/ProductCard.js
 import { Link } from "react-router-dom";
+import Price from "./Price";
+import Button from "./Button";
 
 const ProductCard = ({ product }) => {
   return (
@@ -11,10 +13,10 @@ const ProductCard = ({ product }) => {
       />
       <div className="product-info">
         <h3>{product.name}</h3>
-        <p>${product.price.toFixed(2)}</p>
-        <Link to={`/products/${product.id}`} className="btn btn-primary">
+        <Price price={product.price} className="product-price" />
+        <Button as={Link} to={`/products/${product.id}`} variant="primary">
           View Details
-        </Link>
+        </Button>
       </div>
     </div>
   );

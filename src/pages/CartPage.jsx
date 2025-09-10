@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import Price from '../components/Price';
+import Button from '../components/Button';
 
 const CartPage = () => {
   const { cart, dispatch } = useCart();
@@ -19,7 +21,7 @@ const CartPage = () => {
                 <img src={item.image} alt={item.name} />
                 <div className="item-info">
                   <h3>{item.name}</h3>
-                  <p>${item.price}</p>
+                  <Price price={item.price} />
                   <p>Size: {item.size}</p>
                   <p>Color: {item.color}</p>
                   <div className="quantity-controls">
@@ -59,10 +61,10 @@ const CartPage = () => {
             ))}
           </div>
           <div className="cart-summary">
-            <h2>Total: ${total.toFixed(2)}</h2>
-            <Link to="/checkout" className="btn btn-primary">
+            <h2>Total: <Price price={total} /></h2>
+            <Button as={Link} to="/checkout" variant="primary" size="large">
               Proceed to Checkout
-            </Link>
+            </Button>
           </div>
         </>
       )}

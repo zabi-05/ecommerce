@@ -6,17 +6,24 @@ const CartContext = createContext();
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      // If item already in cart, increase quantity
-      { const existingItem = state.find(item => item.id === action.payload.id);
+      // Check if item with same id, size, and color already exists
+      const existingItem = state.find(item => 
+        item.id === action.payload.id && 
+        item.size === action.payload.size && 
+        item.color === action.payload.color
+      );
+      
       if (existingItem) {
         return state.map(item =>
-          item.id === action.payload.id
-            ? { ...item, quantity: item.quantity + 1 }
+          item.id === action.payload.id && 
+          item.size === action.payload.size && 
+          item.color === action.payload.color
+            ? { ...item, quantity: item.quantity + (action.payload.quantity || 1) }
             : item
         );
       }
-      // Otherwise add new item with quantity 1
-      return [...state, { ...action.payload, quantity: 1 }]; }
+      // Otherwise add new item with specified quantity
+      return [...state, { ...action.payload, quantity: action.payload.quantity || 1 }];
 
     case "REMOVE_ITEM":
       // Remove item by id

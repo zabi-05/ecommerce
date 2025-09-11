@@ -34,6 +34,20 @@ body {
   font-size: 16px;
 }
 
+/* Make media, embeds, and images scale down nicely */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Constrain main app layout */
+.app-main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -611,7 +625,7 @@ a {
 
 .hero-image {
   width: 100%;
-  height: 600px;
+  height: clamp(260px, 55vw, 600px);
   object-fit: cover;
   transition: transform 0.3s ease;
 }
@@ -828,7 +842,7 @@ label select:focus {
 
 .product-image {
   width: 100%;
-  height: 260px;
+  height: clamp(180px, 42vw, 260px);
   object-fit: cover;
   border-bottom: 1px solid var(--light-gray);
 }
@@ -875,7 +889,7 @@ label select:focus {
 
 .product-images img {
   width: 100%;
-  height: 500px;
+  height: clamp(260px, 60vw, 500px);
   border-radius: var(--border-radius);
   object-fit: cover;
   box-shadow: var(--shadow-md);
@@ -1234,8 +1248,8 @@ label select:focus {
 }
 
 .cart-item img {
-  width: 100px;
-  height: 100px;
+  width: 88px;
+  height: 88px;
   object-fit: cover;
   border-radius: var(--border-radius);
 }
@@ -1429,9 +1443,9 @@ label select:focus {
   color: var(--text-color);
   background-color: white;
   transition: all var(--transition-speed);
-  min-width: 300px;
-  max-width: 500px;
-  width: 100%;
+  min-width: 0;
+  max-width: 600px;
+  width: min(100%, 600px);
   outline: none;
 }
 
@@ -1456,8 +1470,8 @@ label select:focus {
   color: var(--text-color);
   background-color: white;
   transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
-  min-width: 180px;
-  max-width: 280px;
+  min-width: 0;
+  max-width: 100%;
   outline-offset: 2px;
   outline-color: transparent;
   cursor: pointer;
@@ -1714,6 +1728,14 @@ label select:focus {
 
 /* Responsive */
 @media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  .app-main {
+    padding: 0.75rem;
+  }
+
   .hero {
     grid-template-columns: 1fr;
     text-align: center;
@@ -1799,7 +1821,7 @@ label select:focus {
   }
 
   .grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .cart-item {
@@ -1843,7 +1865,30 @@ label select:focus {
 }
 
 @media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .toast-container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .toast {
+    min-width: auto;
+    max-width: 100%;
   }
 }
